@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619097414405",
+    "firebase_url": "https://password-manager-1c77e.firebaseio.com",
+    "project_id": "password-manager-1c77e",
+    "storage_bucket": "password-manager-1c77e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619097414405:android:93362f11f818198882b56c",
+        "android_client_info": {
+          "package_name": "com.kevinveld2001.password_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619097414405-50dplqhm3fbd89c1teqo31naib93bf9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAebrX_2cz_9AIKRzIIb6nrsdfQBl9q4DY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619097414405-50dplqhm3fbd89c1teqo31naib93bf9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
