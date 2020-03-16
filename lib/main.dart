@@ -1,6 +1,7 @@
 // package's
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 //porvider's
 import 'provider/login.dart';
@@ -36,7 +37,10 @@ class ScreenBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var loginState = Provider.of<LoginState>(context);
-
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
     if(loginState.mainsreen == "loginScreen"){
       return LoginScreen();
 

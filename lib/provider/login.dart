@@ -7,7 +7,10 @@ class LoginState with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String _mainscreen;
   String _userID;
+  bool _seePassword = true;
+  bool get seePassword  => _seePassword;
   String get mainsreen => _mainscreen; 
+  String get userID => _userID;
 
   LoginState(){
     _auth.currentUser().then((value){
@@ -25,5 +28,11 @@ class LoginState with ChangeNotifier {
 
     });
   }
+
+  void seePasswordSwitch(){
+    _seePassword = !_seePassword;
+    notifyListeners();
+  }
+
 
 }
