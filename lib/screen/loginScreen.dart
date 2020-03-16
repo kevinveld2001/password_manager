@@ -51,11 +51,13 @@ class LoginScreen extends StatelessWidget {
                   key: _loginFormKey,
                   child: Column(children: <Widget>[
                     TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       onChanged: (v){
                         _email = v;
                       },
                       initialValue:_email,
                       decoration: InputDecoration(
+                        
                         hintText: "Email",
                         filled: true,
                         fillColor: Colors.white,
