@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../provider/login.dart';
-import '../provider/firebase.dart';
+
 
 
 String _email = "";
@@ -13,11 +13,19 @@ class LoginScreen extends StatelessWidget {
   final _loginFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     var loginState = Provider.of<LoginState>(context);
     return Scaffold(
       
-      resizeToAvoidBottomPadding: false,
-      body: Column(children: <Widget>[
+      resizeToAvoidBottomPadding: true,
+      body:SingleChildScrollView(
+        child:Container(
+          width: width,
+          height: height,
+        child:Column(
+          
+          children: <Widget>[
         Expanded(
           flex: 3,
           child: Container(
@@ -34,11 +42,11 @@ class LoginScreen extends StatelessWidget {
 
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 50 , horizontal: 40),
-              child: ListView(
+              child: Column(
                 
                 children: <Widget>[
                 Text(
-                  "keep your passowrd save",
+                  "keep your password save",
                   style: TextStyle(
                     fontSize: 40,
                     color: Colors.white,
@@ -54,6 +62,13 @@ class LoginScreen extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (v){
                         _email = v;
+                      },
+                      validator: (v){
+                        if(v.isEmpty){
+                          return 'please enter your email';
+                        }
+                       
+                        return null;
                       },
                       initialValue:_email,
                       decoration: InputDecoration(
@@ -82,6 +97,15 @@ class LoginScreen extends StatelessWidget {
                       onChanged: (v){
                         _password = v;
                       },
+                      validator: (v){
+                        if(v.isEmpty){
+                          return 'please enter your password';
+                        }
+                        if(v.length <6){
+                          return 'password to sort';
+                        }
+                        return null;
+                      },
                       initialValue:_password,
                       obscureText: loginState.seePassword,
                       decoration: InputDecoration(
@@ -109,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                         )
                       ),
                     ),
-
+                    
                   ],),
                 )
 
@@ -138,7 +162,13 @@ class LoginScreen extends StatelessWidget {
               )),
               RaisedButton(
                 color: Color(0xFF00BFA5),
-                onPressed: (){},
+                onPressed: (){
+
+                  if(_loginFormKey.currentState.validate()){
+                    loginState.loginByEmail(_email, _password);
+                  }
+
+                },
                 child: Row(children: <Widget>[
                   Icon(Icons.lock_open,
                   color: Colors.white,
@@ -156,6 +186,10 @@ class LoginScreen extends StatelessWidget {
             ), 
         ), 
       ],),
+        )
+      ),
+      
+       
     );
   }
 }
