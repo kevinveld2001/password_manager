@@ -166,6 +166,8 @@ class LoginScreen extends StatelessWidget {
 
                   if(_loginFormKey.currentState.validate()){
                     loginState.loginByEmail(_email, _password);
+                    _email = "";
+                    _password = "";
                   }
 
                 },

@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/login.dart';
+import '../widgets/addPasswordBottemSheet.dart';
 
-String _seartch;
+
+String _seartch = "";
 
 class MainScreen extends StatelessWidget {
+  final _seartchFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-  final _seartchFormKey = GlobalKey<FormState>();
+  
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    Future _showBottomSheet() async {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape:RoundedRectangleBorder(
+          borderRadius:BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+              topRight: Radius.circular( 16.0)
+          ) 
+          
+        ),
+        builder: (widgetBuilder) => BottomSheetBuilder()
+    );
+  }
     var loginState = Provider.of<LoginState>(context);
     return Scaffold(
       resizeToAvoidBottomPadding: true,
@@ -35,7 +52,7 @@ class MainScreen extends StatelessWidget {
             ),
 
             child:Stack(children: <Widget>[
-Padding(
+              Padding(
               padding: EdgeInsets.symmetric(vertical: 50 , horizontal: 40),
               child: Column(
                 
@@ -54,12 +71,12 @@ Padding(
                   key: _seartchFormKey,
                   child: Column(children: <Widget>[
                     TextFormField(
-                      keyboardType: TextInputType.emailAddress,
+                      
                       onChanged: (v){
                         _seartch = v;
                       },
+                      initialValue: _seartch,
                       
-                      initialValue:_seartch,
                       decoration: InputDecoration(
                         
                         hintText: "Find your password",
@@ -81,7 +98,7 @@ Padding(
                         )
                       ),
                     ),
-                  ]))
+                  ])),
 
               ],),
             ),
@@ -112,7 +129,18 @@ Padding(
         ],),
         
       ),
-      )
+      ),
+
+    floatingActionButton: FloatingActionButton(
+      backgroundColor:  Color(0xFF00BFA5),
+      child: Icon(Icons.add),
+      onPressed: ()async{
+        _showBottomSheet();
+      },
+
+    ),
     );
   }
 }
+
+
