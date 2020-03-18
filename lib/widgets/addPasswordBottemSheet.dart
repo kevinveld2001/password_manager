@@ -3,11 +3,21 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../provider/login.dart';
 
-class BottomSheetBuilder extends StatelessWidget {
-  // double _width;
-  // double _height;
 
-  // BottomSheetBuilder(this._height,this._width);
+import 'addInputWidgets.dart';
+
+class BottomSheetBuilder extends StatelessWidget {
+  
+  PageController controller = PageController();
+
+  void onAddButtonTapped(int index) {
+
+    // use this to animate to the page
+    controller.animateToPage(index,duration: Duration(milliseconds: 600),curve: Curves.ease);
+
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -15,50 +25,19 @@ class BottomSheetBuilder extends StatelessWidget {
       height: height - 170,
       alignment: Alignment.topLeft,
 
-       child:Padding(
-         padding: EdgeInsets.all(40),
-         child: Column(
-           crossAxisAlignment: CrossAxisAlignment.end,
+       child: PageView(
+         
+         controller: controller,
            children: <Widget>[
-           TextField(
+             TitleInput(onAddButtonTapped,0),
+             EmailInput(onAddButtonTapped,1),
+             PasswordInput(onAddButtonTapped,2),
+             NoteInput(onAddButtonTapped,3),
 
-
-             
-            decoration: InputDecoration(
-
-              hintText: "Title",
-
-             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.green,
-                  width: 3,
-                ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                  width:2,
-                )
-              )
-            ),
-           
-           ),
-
-            SizedBox(height: 40,),
-
-            RaisedButton(
-              color: Color(0xFF00BFA5),
-               child: Text("next",
-                  style: TextStyle(
-                    color: Colors.white
-                  ),),
-              onPressed: (){
-
-              },
-            )
-         ],),
-       )
+           ],
+         )
+       
+       
       
     );
   }

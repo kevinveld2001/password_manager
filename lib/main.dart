@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 //porvider's
 import 'provider/login.dart';
 import 'provider/firebase.dart';
+import 'provider/newPassword.dart';
 
 //screen's
 import 'screen/loginScreen.dart';
@@ -20,7 +21,7 @@ class ProviderHome extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<LoginState>(create: (_) => LoginState()),
         ChangeNotifierProvider<FirebaseState>(create: (_) => FirebaseState()),
-
+        ChangeNotifierProvider<NewPasswordState>(create: (_) => NewPasswordState())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -58,3 +59,5 @@ class ScreenBuilder extends StatelessWidget {
     
   }
 }
+
+
