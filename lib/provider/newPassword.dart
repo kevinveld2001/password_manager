@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class NewPasswordState with ChangeNotifier {
@@ -22,8 +22,36 @@ class NewPasswordState with ChangeNotifier {
   }
 
   void clearInput(){
-    _inputfields = ["","","",""];
+    for (int i = 0; i < _inputfields.length ; i++){
+      _inputfields[i] = "";
+    }
     notifyListeners();
   }
+
+  int finish (String uid){
+    
+    for (int i = 0; i < _inputfields.length - 1; i++){
+      if(_inputfields[i].isEmpty){
+        return i;
+      }
+    }
+
+  print("add new password \nTitle: ${_inputfields[0]}\nEmail:${_inputfields[1]}\nPassword:${_inputfields[2]}\nNOTE:${_inputfields[3]}");
+
+  Firestore.instance.collection('store/$uid/passwords').document()
+    .setData({ 
+      'title': _inputfields[0],
+      'email': _inputfields[1],
+      'password': _inputfields[2],
+      'note': _inputfields[3],
+       });
+
+
+  clearInput();
+  notifyListeners();
+  //sucses code :)
+  return 255;
+  }
+
 
 }

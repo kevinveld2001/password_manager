@@ -232,6 +232,7 @@ class NoteInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var newPasswordState = Provider.of<NewPasswordState>(context);
+    var loginState = Provider.of<LoginState>(context);
   TextEditingController textFieldController = TextEditingController()..text = newPasswordState.inputfields[3];
     return Padding(
          padding: EdgeInsets.all(40),
@@ -295,8 +296,15 @@ class NoteInput extends StatelessWidget {
               onPressed: (){
                   
                   FocusScope.of(context).requestFocus(new FocusNode()); //remove focus
-                  newPasswordState.clearInput();
-                  Navigator.pop(context);
+                  int statuscode = newPasswordState.finish(loginState.userID);
+                  if(statuscode == 255){
+                    Navigator.pop(context);
+                  }else{
+                    onAddButtonTapped(statuscode);
+                  }
+                  
+                  
+                  
               },
             )
             ],),
