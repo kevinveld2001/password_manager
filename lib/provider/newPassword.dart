@@ -8,6 +8,8 @@ class NewPasswordState with ChangeNotifier {
   List<String> _inputfields = ["","","",""];
   bool _passwordVissible = true;
 
+  
+
   List<String> get inputfields  => _inputfields;
   bool get passwordVissible => _passwordVissible;
 

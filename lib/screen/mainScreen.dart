@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/login.dart';
 import '../widgets/addPasswordBottemSheet.dart';
-
+import '../widgets/passwordCardWidget.dart';
+import '../provider/firebase.dart';
 
 String _seartch = "";
 
 class MainScreen extends StatelessWidget {
   final _seartchFormKey = GlobalKey<FormState>();
+
+
+  
   @override
   Widget build(BuildContext context) {
   
@@ -28,7 +32,14 @@ class MainScreen extends StatelessWidget {
         builder: (widgetBuilder) => BottomSheetBuilder()
     );
   }
+
+
+    var firebaseState = Provider.of<FirebaseState>(context);
     var loginState = Provider.of<LoginState>(context);
+    
+    firebaseState.getpasswords(loginState.userID);
+
+    
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       body:SingleChildScrollView(
@@ -74,6 +85,7 @@ class MainScreen extends StatelessWidget {
                       
                       onChanged: (v){
                         _seartch = v;
+                        firebaseState.seartch(v);
                       },
                       initialValue: _seartch,
                       
@@ -124,7 +136,19 @@ class MainScreen extends StatelessWidget {
         ),
         Expanded(
           flex: 3,
-          child: Center(child: Text("de rest"))
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: firebaseState.passwordList.length,
+            itemBuilder: (BuildContext ctxt, int index) {
+              return PasswordCardWidget(
+                firebaseState.passwordList[index].title,
+                firebaseState.passwordList[index].email,
+                firebaseState.passwordList[index].docID
+                );
+            }
+            
+            ),
+         
         )
         ],),
         
