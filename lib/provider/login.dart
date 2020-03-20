@@ -8,9 +8,16 @@ class LoginState with ChangeNotifier {
   String _mainscreen;
   String _userID;
   bool _seePassword = true;
+  bool _waiterBootScreen = false;
+
+
+
+  bool get waiterBootScreen => _waiterBootScreen;
   bool get seePassword  => _seePassword;
   String get mainsreen => _mainscreen; 
   String get userID => _userID;
+
+
 
   LoginState(){
     _auth.currentUser().then((value){
@@ -28,6 +35,19 @@ class LoginState with ChangeNotifier {
 
     });
   }
+
+  void startApp(){
+    startByTimeOut(5);
+  }
+
+  Future<void> startByTimeOut(int sec) {
+   Future.delayed(Duration(seconds: sec), () {
+    _waiterBootScreen = true;
+    notifyListeners();
+   });
+  }
+
+
 
   void seePasswordSwitch(){
     _seePassword = !_seePassword;

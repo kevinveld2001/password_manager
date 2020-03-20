@@ -33,25 +33,36 @@ class ProviderHome extends StatelessWidget {
 
 
 
+
+
+
 class ScreenBuilder extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
     var loginState = Provider.of<LoginState>(context);
+    
+
+    loginState.startApp();
+
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
-    if(loginState.mainsreen == "loginScreen"){
+    if(loginState.mainsreen == "loginScreen" && loginState.waiterBootScreen){
       return LoginScreen();
 
-    } else if (loginState.mainsreen == "mainScreen") {
+    } else if (loginState.mainsreen == "mainScreen" && loginState.waiterBootScreen) {
       return MainScreen();
 
     } else {
       return Scaffold(
+        backgroundColor: Colors.white,
         body: Center(
-          child: CircularProgressIndicator(),
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Image.asset("packages/password_manager/assets/icon.png"),
+          )
         ),
       );
     }
