@@ -44,9 +44,9 @@ class MainScreen extends StatelessWidget {
 
     var firebaseState = Provider.of<FirebaseState>(context);
     var loginState = Provider.of<LoginState>(context);
-    
-    startFirebaseState(firebaseState,loginState);
-
+    if (firebaseState.passwordList.length ==0){ 
+         startFirebaseState(firebaseState,loginState);
+    }
     
     return Scaffold(
       resizeToAvoidBottomPadding: true,
