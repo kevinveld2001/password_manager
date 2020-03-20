@@ -7,6 +7,14 @@ import '../provider/firebase.dart';
 
 String _seartch = "";
 
+Future<void> startFirebaseState(var firebaseState,var loginState) {
+  // Imagine that this function is fetching user info from another service or database
+  return Future.delayed(Duration(seconds: 2), () => firebaseState.getpasswords(loginState.userID));
+}
+
+
+
+
 class MainScreen extends StatelessWidget {
   final _seartchFormKey = GlobalKey<FormState>();
 
@@ -37,7 +45,7 @@ class MainScreen extends StatelessWidget {
     var firebaseState = Provider.of<FirebaseState>(context);
     var loginState = Provider.of<LoginState>(context);
     
-    firebaseState.getpasswords(loginState.userID);
+    startFirebaseState(firebaseState,loginState);
 
     
     return Scaffold(
@@ -160,6 +168,7 @@ class MainScreen extends StatelessWidget {
       child: Icon(Icons.add),
       onPressed: ()async{
         _showBottomSheet();
+        FocusScope.of(context).requestFocus(new FocusNode());
       },
 
     ),
