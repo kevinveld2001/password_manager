@@ -42,8 +42,9 @@ class ScreenBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     var loginState = Provider.of<LoginState>(context);
     
-
+    if(!loginState.waiterBootScreen){
     loginState.startApp();
+    }
 
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
