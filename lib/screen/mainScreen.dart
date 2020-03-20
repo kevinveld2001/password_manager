@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/provider/newPassword.dart';
 import 'package:provider/provider.dart';
 import '../provider/login.dart';
 import '../widgets/addPasswordBottemSheet.dart';
@@ -9,7 +10,7 @@ String _seartch = "";
 
 Future<void> startFirebaseState(var firebaseState,var loginState) {
   // Imagine that this function is fetching user info from another service or database
-  return Future.delayed(Duration(seconds: 2), () => firebaseState.getpasswords(loginState.userID));
+  return Future.delayed(Duration(seconds: 1), () => firebaseState.getpasswords(loginState.userID));
 }
 
 
@@ -43,6 +44,7 @@ class MainScreen extends StatelessWidget {
 
 
     var firebaseState = Provider.of<FirebaseState>(context);
+    var newPasswordState = Provider.of<NewPasswordState>(context);
     var loginState = Provider.of<LoginState>(context);
     if (firebaseState.passwordList.length ==0){ 
          startFirebaseState(firebaseState,loginState);
@@ -131,6 +133,7 @@ class MainScreen extends StatelessWidget {
                 ),
                 onPressed: (){
                   loginState.logout();
+                  firebaseState.clear(); //clear all data 
                 },
               )
             ),
@@ -168,6 +171,7 @@ class MainScreen extends StatelessWidget {
       child: Icon(Icons.add),
       onPressed: ()async{
         _showBottomSheet();
+        newPasswordState.clearInput();
         FocusScope.of(context).requestFocus(new FocusNode());
       },
 

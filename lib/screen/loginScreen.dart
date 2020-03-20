@@ -165,6 +165,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: (){
 
                   if(_loginFormKey.currentState.validate()){
+                    print("login:\n\nemail: $_email\npassword:$_password\n");
                     loginState.loginByEmail(_email, _password);
                     _email = "";
                     _password = "";

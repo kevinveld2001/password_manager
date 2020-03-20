@@ -57,8 +57,13 @@ class FirebaseState with ChangeNotifier {
         notifyListeners();
     });
 
+  }
 
-     
+
+  void clear(){
+    _passwordList.clear();
+    _seartchpasswordList.clear();
+    _seartch = false;
   }
 
 }
