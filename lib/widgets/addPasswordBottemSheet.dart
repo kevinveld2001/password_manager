@@ -10,7 +10,7 @@ class BottomSheetBuilder extends StatelessWidget {
   
   PageController controller = PageController();
 
-  void onAddButtonTapped(int index) {
+  void goScreen(int index) {
 
     // use this to animate to the page
     controller.animateToPage(index,duration: Duration(milliseconds: 600),curve: Curves.ease);
@@ -29,10 +29,10 @@ class BottomSheetBuilder extends StatelessWidget {
          
          controller: controller,
            children: <Widget>[
-             TitleInput(onAddButtonTapped,0),
-             EmailInput(onAddButtonTapped,1),
-             PasswordInput(onAddButtonTapped,2),
-             NoteInput(onAddButtonTapped,3),
+             TitleInput(goScreen,0),
+             EmailInput(goScreen,1),
+             PasswordInput(goScreen,2),
+             NoteInput(goScreen,3),
 
            ],
          )

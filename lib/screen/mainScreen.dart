@@ -5,6 +5,8 @@ import '../provider/login.dart';
 import '../widgets/addPasswordBottemSheet.dart';
 import '../widgets/passwordCardWidget.dart';
 import '../provider/firebase.dart';
+import '../widgets/viewPasswordBottemSheet.dart';
+
 
 String _seartch = "";
 
@@ -27,7 +29,7 @@ class MainScreen extends StatelessWidget {
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    Future _showBottomSheet() async {
+    Future _showNewPasswordBottomSheet() async {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -41,6 +43,19 @@ class MainScreen extends StatelessWidget {
         builder: (widgetBuilder) => BottomSheetBuilder()
     );
   }
+      Future _showPasswordViewBottomSheet(String docID) async {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape:RoundedRectangleBorder(
+          borderRadius:BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+              topRight: Radius.circular( 16.0)
+          ) 
+          
+        ),
+        builder: (widgetBuilder) => ViewPasswordBottomSheetBuilder(docID)
+    );}
 
 
     var firebaseState = Provider.of<FirebaseState>(context);
@@ -154,7 +169,8 @@ class MainScreen extends StatelessWidget {
               return PasswordCardWidget(
                 firebaseState.passwordList[index].title,
                 firebaseState.passwordList[index].email,
-                firebaseState.passwordList[index].docID
+                firebaseState.passwordList[index].docID,
+                _showPasswordViewBottomSheet
                 );
             }
             
@@ -170,7 +186,7 @@ class MainScreen extends StatelessWidget {
       backgroundColor:  Color(0xFF00BFA5),
       child: Icon(Icons.add),
       onPressed: ()async{
-        _showBottomSheet();
+        _showNewPasswordBottomSheet();
         newPasswordState.clearInput();
         FocusScope.of(context).requestFocus(new FocusNode());
       },

@@ -5,9 +5,9 @@ import '../provider/login.dart';
 import '../provider/newPassword.dart';
 
 class TitleInput extends StatelessWidget {
-  final void Function(int) onAddButtonTapped;
+  final void Function(int) goPage;
   final int mePage;
-  TitleInput(this.onAddButtonTapped, this.mePage);
+  TitleInput(this.goPage, this.mePage);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class TitleInput extends StatelessWidget {
                     color: Colors.white
                   ),),
               onPressed: (){
-                  onAddButtonTapped(mePage+1);
+                  goPage(mePage+1);
                   FocusScope.of(context).requestFocus(new FocusNode()); //remove focus
                   
               },
@@ -65,9 +65,9 @@ class TitleInput extends StatelessWidget {
 }
 
 class EmailInput extends StatelessWidget {
-  final void Function(int) onAddButtonTapped;
+  final void Function(int) goPage;
   final int mePage;
-  EmailInput(this.onAddButtonTapped, this.mePage);
+  EmailInput(this.goPage, this.mePage);
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class EmailInput extends StatelessWidget {
               children: <Widget>[
                 FlatButton(
               onPressed: (){
-                onAddButtonTapped(mePage-1);
+                goPage(mePage-1);
                   FocusScope.of(context).requestFocus(new FocusNode());
               },
                child: Text("back",
@@ -128,7 +128,7 @@ class EmailInput extends StatelessWidget {
                     color: Colors.white
                   ),),
               onPressed: (){
-                  onAddButtonTapped(mePage+1);
+                  goPage(mePage+1);
                   FocusScope.of(context).requestFocus(new FocusNode()); //remove focus
                   
               },
@@ -141,9 +141,9 @@ class EmailInput extends StatelessWidget {
 }
 
 class PasswordInput extends StatelessWidget {
-  final void Function(int) onAddButtonTapped;
+  final void Function(int) goPage;
   final int mePage;
-  PasswordInput(this.onAddButtonTapped, this.mePage);
+  PasswordInput(this.goPage, this.mePage);
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +195,7 @@ class PasswordInput extends StatelessWidget {
               children: <Widget>[
                 FlatButton(
               onPressed: (){
-                onAddButtonTapped(mePage-1);
+                goPage(mePage-1);
                   FocusScope.of(context).requestFocus(new FocusNode());
               },
                child: Text("back",
@@ -211,7 +211,7 @@ class PasswordInput extends StatelessWidget {
                     color: Colors.white
                   ),),
               onPressed: (){
-                  onAddButtonTapped(mePage+1);
+                  goPage(mePage+1);
                   FocusScope.of(context).requestFocus(new FocusNode()); //remove focus
                   
               },
@@ -225,9 +225,9 @@ class PasswordInput extends StatelessWidget {
 
 
 class NoteInput extends StatelessWidget {
-  final void Function(int) onAddButtonTapped;
+  final void Function(int) goPage;
   final int mePage;
-  NoteInput(this.onAddButtonTapped, this.mePage);
+  NoteInput(this.goPage, this.mePage);
 
   @override
   Widget build(BuildContext context) {
@@ -278,7 +278,7 @@ class NoteInput extends StatelessWidget {
               children: <Widget>[
                 FlatButton(
               onPressed: (){
-                onAddButtonTapped(mePage-1);
+                goPage(mePage-1);
                   FocusScope.of(context).requestFocus(new FocusNode());
               },
                child: Text("back",
@@ -300,7 +300,7 @@ class NoteInput extends StatelessWidget {
                   if(statuscode == 255){
                     Navigator.pop(context);
                   }else{
-                    onAddButtonTapped(statuscode);
+                    goPage(statuscode);
                   }
                   
                   
