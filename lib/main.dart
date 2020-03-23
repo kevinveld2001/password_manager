@@ -9,7 +9,7 @@ import 'provider/firebase.dart';
 import 'provider/newPassword.dart';
 
 //screen's
-import 'screen/loginScreen.dart';
+import 'screen/loginRegisterSwitcher.dart';
 import 'screen/mainScreen.dart';
 
 void main() => runApp(ProviderHome());
@@ -51,7 +51,7 @@ class ScreenBuilder extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     if(loginState.mainsreen == "loginScreen" && loginState.waiterBootScreen){
-      return LoginScreen();
+      return LoginRegisterSwitcher();
 
     } else if (loginState.mainsreen == "mainScreen" && loginState.waiterBootScreen) {
       return MainScreen();

@@ -7,12 +7,13 @@ import '../provider/login.dart';
 
 String _email = "";
 String _password = "";
+String _password2 = "";
 
 
-class LoginScreen extends StatelessWidget {
-  final void Function(int) goPage;
+class RegisterScreen extends StatelessWidget {
+    final void Function(int) goPage;
   final int mePage;
-  LoginScreen(this.goPage, this.mePage);
+  RegisterScreen(this.goPage, this.mePage);
 
 
   final _loginFormKey = GlobalKey<FormState>();
@@ -138,6 +139,50 @@ class LoginScreen extends StatelessWidget {
                         )
                       ),
                     ),
+                    SizedBox(height: 15,),
+                    TextFormField(
+                      onChanged: (v){
+                        _password2 = v;
+                      },
+                      validator: (v){
+                        if(v.isEmpty){
+                          return 'please enter your password';
+                        }
+                        if(v.length <6){
+                          return 'password to sort';
+                        }
+                        if(v != _password){
+                          return 'repeat your password';
+                        }
+                        return null;
+                      },
+                      initialValue:_password2,
+                      obscureText: loginState.seePassword,
+                      decoration: InputDecoration(
+                        
+                        hintText: "repeat password",
+                        filled: true,
+                        fillColor: Colors.white,
+                        suffixIcon: IconButton(icon: Icon(Icons.remove_red_eye),
+                        focusColor: Colors.black
+                        , onPressed: (){
+                            loginState.seePasswordSwitch();
+                        }),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.green,
+                            width: 3,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                            width:2,
+                          )
+                        )
+                      ),
+                    ),
                     
                   ],),
                 )
@@ -159,8 +204,8 @@ class LoginScreen extends StatelessWidget {
               FlatButton(
                 
                 onPressed: (){
-                  goPage(1);
-              }, child: Text("REGISTER",
+                goPage(0);
+              }, child: Text("LOGIN",
               style: TextStyle(
                 color: Color(0xFF00BFA5),
               ),
@@ -170,10 +215,11 @@ class LoginScreen extends StatelessWidget {
                 onPressed: (){
 
                   if(_loginFormKey.currentState.validate()){
-                    print("login:\n\nemail: $_email\npassword:$_password\n");
-                    loginState.loginByEmail(_email, _password);
+                    print("register:\n\nemail: $_email\npassword: $_password\npassword2: $_password2");
+                    loginState.registerByEmail(_email, _password);
                     _email = "";
                     _password = "";
+                    _password2 = "";
                   }
 
                 },
@@ -181,7 +227,7 @@ class LoginScreen extends StatelessWidget {
                   Icon(Icons.lock_open,
                   color: Colors.white,
                   ),
-                  Text("LOGIN",
+                  Text("REGISTER",
                   style: TextStyle(
                     color: Colors.white
                   ),)

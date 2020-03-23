@@ -69,6 +69,26 @@ class LoginState with ChangeNotifier {
       
    
   }
+  void registerByEmail(String email, String password) {
+    _auth.createUserWithEmailAndPassword(email: email, password: password)
+    .then((v){
+      try{
+        v.user.sendEmailVerification();
+        print("email send");
+      }catch(err){
+        print (err);
+      }
+      _userID = v.user.uid;
+      _mainscreen = "mainScreen";
+      print(_userID);
+      
+      notifyListeners();
+    }).catchError((err){
+      print(err);
+
+    });
+    
+  }
 
   void logout(){
     _auth.signOut();
