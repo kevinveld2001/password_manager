@@ -65,6 +65,7 @@ class LoginState with ChangeNotifier {
         notifyListeners();
       }).catchError((err){
         print (err);
+        notifyListeners();
       });
       
    
@@ -85,7 +86,7 @@ class LoginState with ChangeNotifier {
       notifyListeners();
     }).catchError((err){
       print(err);
-
+      notifyListeners();
     });
     
   }
