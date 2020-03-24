@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -113,6 +115,22 @@ class LoginState with ChangeNotifier {
     notifyListeners();
     
   }
+
+  Future<bool> resterEmail(String email)async{
+    bool sucsess = true;
+    print(email);
+    await _auth.sendPasswordResetEmail(email: email)
+    .catchError((e){
+      sucsess = false;
+      
+    }).then((e){
+    });
+    
+    
+    return sucsess;
+  }
+  
+
 
 
 }

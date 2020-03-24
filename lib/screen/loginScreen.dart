@@ -22,6 +22,31 @@ class LoginScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     var loginState = Provider.of<LoginState>(context);
     
+    Future showForgotPasswordPopup (String msg){
+      showDialog(
+        context: context,
+        builder: (BuildContext context){
+            return AlertDialog(
+              title: Text("forgot password"),
+              content: Text(msg),
+              actions: <Widget>[
+                RaisedButton(
+                  color: Color(0xFF00BFA5),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text("ok",
+                    style: TextStyle(
+                      color: Colors.white
+                    ),
+                  ),
+                )
+              ],
+            );
+            }     
+      );
+    }
+
 
     return Scaffold(
       
@@ -151,6 +176,31 @@ class LoginScreen extends StatelessWidget {
                     ):
                      SizedBox(),
 
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,                    
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: ()async{
+
+                            if(await loginState.resterEmail(_email)){
+                              print("email is send");
+                              showForgotPasswordPopup("Reset email is send.");
+                            }else{
+                              print("fill in your email");
+                              showForgotPasswordPopup("please fill in your email");
+                            }
+
+                          },
+                        
+                         child: Text("forgot password"),
+                          textColor: Colors.white,                        
+                        ),
+                        FlatButton(onPressed: (){}, child: Text("terms of service"),
+                          textColor: Colors.white,
+                        ),
+
+
+                      ],)
 
 
                   ],),
@@ -170,6 +220,7 @@ class LoginScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                
               FlatButton(
                 
                 onPressed: (){
