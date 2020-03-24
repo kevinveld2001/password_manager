@@ -9,9 +9,9 @@ class LoginState with ChangeNotifier {
   String _userID;
   bool _seePassword = true;
   bool _waiterBootScreen = false;
+  bool _loginErr = false;
 
-
-
+  bool get loginErr => _loginErr;
   bool get waiterBootScreen => _waiterBootScreen;
   bool get seePassword  => _seePassword;
   String get mainsreen => _mainscreen; 
@@ -40,13 +40,23 @@ class LoginState with ChangeNotifier {
     startByTimeOut(5);
   }
 
-  Future<void> startByTimeOut(int sec) {
+  Future startByTimeOut(int sec) {
    Future.delayed(Duration(seconds: sec), () {
     _waiterBootScreen = true;
+    _loginErr = false;
     notifyListeners();
+    
    });
+   return null;
   }
-
+  Future resterErr(int sec) {
+   Future.delayed(Duration(seconds: sec), () {
+    _loginErr = false;
+    notifyListeners();
+    
+   });
+   return null;
+  }
 
 
   void seePasswordSwitch(){
@@ -65,7 +75,9 @@ class LoginState with ChangeNotifier {
         notifyListeners();
       }).catchError((err){
         print (err);
+        _loginErr = true;
         notifyListeners();
+        resterErr(3);
       });
       
    
@@ -86,7 +98,9 @@ class LoginState with ChangeNotifier {
       notifyListeners();
     }).catchError((err){
       print(err);
+      _loginErr = true;
       notifyListeners();
+      resterErr(3);
     });
     
   }
@@ -95,7 +109,9 @@ class LoginState with ChangeNotifier {
     _auth.signOut();
     _mainscreen = "loginScreen";
       _userID = null;
+    
     notifyListeners();
+    
   }
 
 

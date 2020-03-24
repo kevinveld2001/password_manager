@@ -5,9 +5,9 @@ import 'registerScreen.dart';
 
 
 class LoginRegisterSwitcher extends StatelessWidget {
-  PageController controller = PageController();
+  final PageController controller = PageController();
      void goScreen(int index) {
-      controller.animateToPage(index,duration: Duration(milliseconds: 300),curve: Curves.ease);
+      controller.animateToPage(index,duration: Duration(milliseconds: 500),curve: Curves.ease);
     }
   @override
   Widget build(BuildContext context) {

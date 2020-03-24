@@ -21,8 +21,11 @@ class LoginScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     var loginState = Provider.of<LoginState>(context);
+    
+
     return Scaffold(
       
+    
       resizeToAvoidBottomPadding: true,
       body:SingleChildScrollView(
         child:Container(
@@ -31,6 +34,7 @@ class LoginScreen extends StatelessWidget {
         child:Column(
           
           children: <Widget>[
+            
         Expanded(
           flex: 5,
           child: Container(
@@ -138,7 +142,17 @@ class LoginScreen extends StatelessWidget {
                         )
                       ),
                     ),
-                    
+                    SizedBox(height: 10,),
+                    loginState.loginErr == true?
+                    Text("login failed",
+                    style: TextStyle(
+                      color: Colors.red
+                    ),
+                    ):
+                     SizedBox(),
+
+
+
                   ],),
                 )
 

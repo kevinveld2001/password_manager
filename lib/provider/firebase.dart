@@ -29,9 +29,7 @@ class FirebaseState with ChangeNotifier {
 
   
 
-  FirebaseState(){
-
-  }
+  FirebaseState();
 
 
 

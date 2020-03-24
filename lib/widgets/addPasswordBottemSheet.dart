@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import '../provider/login.dart';
+
 
 
 import 'addInputWidgets.dart';
 
 class BottomSheetBuilder extends StatelessWidget {
   
-  PageController controller = PageController();
+  final PageController controller = PageController();
 
   void goScreen(int index) {
 

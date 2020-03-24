@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ViewPasswordInputBox extends StatelessWidget {
-  String _type;
-  String _data;
+  final String _type;
+  final String _data;
 
   ViewPasswordInputBox(this._type,this._data);
   

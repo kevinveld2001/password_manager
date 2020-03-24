@@ -7,7 +7,7 @@ import '../provider/passwords.dart';
 import 'viewPasswrodWidgets.dart';
 
 class ViewPasswordBottomSheetBuilder extends StatelessWidget {
-  String _docID;
+  final String _docID;
   
   ViewPasswordBottomSheetBuilder(this._docID);
 

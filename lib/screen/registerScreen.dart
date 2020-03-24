@@ -183,7 +183,14 @@ class RegisterScreen extends StatelessWidget {
                         )
                       ),
                     ),
-                    
+                    SizedBox(height: 10,),
+                    loginState.loginErr == true?
+                    Text("register failed",
+                    style: TextStyle(
+                      color: Colors.red
+                    ),
+                    ):
+                     SizedBox(),
                   ],),
                 )
 
