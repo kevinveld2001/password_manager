@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'dart:math';
 
 class NewPasswordState with ChangeNotifier {
 
@@ -53,6 +53,29 @@ class NewPasswordState with ChangeNotifier {
   notifyListeners();
   //sucses code :)
   return 255;
+  }
+
+  String _lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+  String _upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  String _numbers = "0123456789";
+
+
+  /// make a random password and put it in the password fieled;
+  /// [length] set length of password
+  /// [nummbers] put numbers in the password
+  void setRandomPassword(int length,{bool nummber = true}){
+    String _charList = ""; 
+    _charList += _lowerCaseLetters;
+    _charList += _upperCaseLetters;
+    _charList += nummber == true? _numbers: "";
+
+    String newRandomPassword = "";
+    for(int i=0;i<length;i++){
+      int randomInt = Random.secure().nextInt(_charList.length);
+      newRandomPassword += _charList[randomInt];
+    }
+    _inputfields[2] = newRandomPassword;
+    notifyListeners();
   }
 
 

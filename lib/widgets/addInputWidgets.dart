@@ -169,6 +169,8 @@ class PasswordInput extends StatelessWidget {
                 , onPressed: (){
                      newPasswordState.seePasswordSwitch();
               }),
+
+              
               hintText: "Password",
               
              focusedBorder: OutlineInputBorder(
@@ -193,6 +195,7 @@ class PasswordInput extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                
                 FlatButton(
               onPressed: (){
                 goPage(mePage-1);
@@ -217,7 +220,16 @@ class PasswordInput extends StatelessWidget {
               },
             )
             ],),
-            
+            FlatButton(
+              onPressed: (){
+                newPasswordState.setRandomPassword(20);
+              },
+               child: Text("random password",
+               style: TextStyle(
+                  color: Color(0xFF00BFA5),
+                ),
+               )
+               ),
          ],)
     );
   }
