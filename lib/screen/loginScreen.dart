@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../provider/login.dart';
-
+import '../widgets/tos.dart';
 
 
 String _email = "";
@@ -10,12 +10,14 @@ String _password = "";
 
 
 class LoginScreen extends StatelessWidget {
-  final void Function(int) goPage;
-  final int mePage;
   LoginScreen(this.goPage, this.mePage);
 
+  final int mePage;
 
   final _loginFormKey = GlobalKey<FormState>();
+
+  final void Function(int) goPage;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -46,10 +48,23 @@ class LoginScreen extends StatelessWidget {
             }     
       );
     }
-
+    Future _showTOS() async {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape:RoundedRectangleBorder(
+          borderRadius:BorderRadius.only(
+              topLeft: Radius.circular(16.0),
+              topRight: Radius.circular( 16.0)
+          ) 
+          
+        ),
+        builder: (widgetBuilder) => TosView()
+    );
+  }
 
     return Scaffold(
-      
+       
     
       resizeToAvoidBottomPadding: true,
       body:SingleChildScrollView(
@@ -195,7 +210,10 @@ class LoginScreen extends StatelessWidget {
                          child: Text("forgot password"),
                           textColor: Colors.white,                        
                         ),
-                        FlatButton(onPressed: (){}, child: Text("terms of service"),
+                        FlatButton(onPressed: (){
+                          _showTOS();
+                        }
+                        , child: Text("terms of service"),
                           textColor: Colors.white,
                         ),
 

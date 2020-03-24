@@ -47,7 +47,7 @@ flutter:
   assets:
     - packages/password_manager/assets/background.png
     - packages/password_manager/assets/icon.png
-    
+    - packages/password_manager/assets/terms-of-service.txt
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
