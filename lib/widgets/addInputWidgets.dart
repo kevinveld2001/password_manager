@@ -198,6 +198,9 @@ class PasswordInput extends StatelessWidget {
                 
                 FlatButton(
               onPressed: (){
+                if(newPasswordState.passwordVissible == false){
+                    newPasswordState.seePasswordSwitch();
+                  }
                 goPage(mePage-1);
                   FocusScope.of(context).requestFocus(new FocusNode());
               },
@@ -216,7 +219,9 @@ class PasswordInput extends StatelessWidget {
               onPressed: (){
                   goPage(mePage+1);
                   FocusScope.of(context).requestFocus(new FocusNode()); //remove focus
-                  
+                  if(newPasswordState.passwordVissible == false){
+                    newPasswordState.seePasswordSwitch();
+                  }
               },
             )
             ],),
