@@ -181,7 +181,7 @@ class LoginScreen extends StatelessWidget {
                       children: <Widget>[
                         FlatButton(
                           onPressed: ()async{
-
+                            print("going to restet: "+_email);
                             if(await loginState.resterEmail(_email)){
                               print("email is send");
                               showForgotPasswordPopup("Reset email is send.");

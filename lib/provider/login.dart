@@ -117,14 +117,22 @@ class LoginState with ChangeNotifier {
   }
 
   Future<bool> resterEmail(String email)async{
+    print("reset "+email);
     bool sucsess = true;
     print(email);
+    try{
     await _auth.sendPasswordResetEmail(email: email)
     .catchError((e){
-      sucsess = false;
+      
+        print("e="+e);
+        sucsess = false;
       
     }).then((e){
+      
     });
+    }catch(err){
+      sucsess = false;
+    }
     
     
     return sucsess;
