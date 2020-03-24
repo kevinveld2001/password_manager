@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 
 import 'passwords.dart';
@@ -63,5 +64,12 @@ class FirebaseState with ChangeNotifier {
     _seartchpasswordList.clear();
     _seartch = false;
   }
+
+  void deleteitem(String docID,String uid){
+    Firestore.instance.collection("store/$uid/passwords").document(docID).delete();
+    notifyListeners();
+  }
+
+
 
 }

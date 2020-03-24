@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../provider/firebase.dart';
 import '../provider/passwords.dart';
 import 'viewPasswrodWidgets.dart';
-
+import '../provider/login.dart';
 class ViewPasswordBottomSheetBuilder extends StatelessWidget {
   final String _docID;
   
@@ -18,9 +18,56 @@ class ViewPasswordBottomSheetBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var firebaseState = Provider.of<FirebaseState>(context);
+    var loginState = Provider.of<LoginState>(context);
     double height = MediaQuery.of(context).size.height;
     
     List<PasswordHolder> passwordList = firebaseState.passwordList;
+
+    Future _showDeleteBox () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context){
+            return AlertDialog(
+              title: Text("Delete?"),
+              content: Text("Are you sure you want to delete this item?"),
+              actions: <Widget>[
+                FlatButton(
+              onPressed: (){
+                print("delete doc: "+_docID);
+
+                firebaseState.deleteitem(_docID,loginState.userID);
+                Navigator.pop(context);
+                Navigator.pop(context);
+                
+              },
+               child: Text("delete",
+               style: TextStyle(
+                  color: Colors.red
+                ),
+               )
+               ),
+            RaisedButton(
+              color: Color(0xFF00BFA5),
+               child: Text("CANCEL",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),),
+              onPressed: (){
+                  
+                  Navigator.pop(context);
+                  
+              },
+            )
+              ],
+                
+                  
+                
+              
+            );
+        }
+      );
+    }
+
 
     for(int i = 0 ; i < passwordList.length; i++){
         if(passwordList[i].docID == _docID){
@@ -48,7 +95,35 @@ class ViewPasswordBottomSheetBuilder extends StatelessWidget {
              ViewPasswordInputBox("password",_password),
              SizedBox(height: 20,),
              ViewPasswordInputBox("note",_note),
+              SizedBox(height: 20,),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                
+                FlatButton(
+              onPressed: (){
+                _showDeleteBox();
+              },
+               child: Text("delete",
+               style: TextStyle(
+                  color: Colors.grey
+                ),
+               )
+               ),
+            RaisedButton(
+              color: Color(0xFF00BFA5),
+               child: Text("DONE",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),),
+              onPressed: (){
+                  
+                  Navigator.pop(context);
+                  
+              },
+            )
+            ],),
            ],
          )
     );
