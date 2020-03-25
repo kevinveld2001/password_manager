@@ -24,7 +24,7 @@ class ProviderHome extends StatelessWidget {
         ChangeNotifierProvider<NewPasswordState>(create: (_) => NewPasswordState())
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         home:ScreenBuilder(),
       ),
     );
