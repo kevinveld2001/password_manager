@@ -11,6 +11,7 @@ import 'provider/newPassword.dart';
 //screen's
 import 'screen/loginRegisterSwitcher.dart';
 import 'screen/mainScreen.dart';
+import 'screen/pincode.dart';
 
 void main() => runApp(ProviderHome());
 
