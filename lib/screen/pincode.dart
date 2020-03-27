@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:password_manager/provider/login.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 import '../widgets/pinInput.dart';
 
 class PinCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var loginState = Provider.of<LoginState>(context);
+    print(loginState.pincodearray);
+    
+
     return Scaffold(
       body: Container(
         alignment: Alignment.topLeft,
@@ -38,12 +44,12 @@ class PinCodeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                    PinInput(0),
-                    PinInput(0),
-                    PinInput(1),
-                    PinInput(2),
-                    PinInput(2),
-                    PinInput(2),
+                    PinInput(loginState.pincodearray[0]),
+                    PinInput(loginState.pincodearray[1]),
+                    PinInput(loginState.pincodearray[2]),
+                    PinInput(loginState.pincodearray[3]),
+                    PinInput(loginState.pincodearray[4]),
+                    PinInput(loginState.pincodearray[5]),
 
                   ],)
 
@@ -76,7 +82,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("1");},
                             child: RondBTNText("1"),
                           ),
                           ),
@@ -85,7 +91,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("2");},
                             child: RondBTNText("2"),
                           ),
                           ),
@@ -94,7 +100,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("3");},
                             child: RondBTNText("3"),
                           ),
                           ),
@@ -109,7 +115,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("4");},
                             child: RondBTNText("4"),
                           ),
                           ),
@@ -118,7 +124,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("5");},
                             child: RondBTNText("5"),
                           ),
                           ),
@@ -127,7 +133,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("6");},
                             child: RondBTNText("6"),
                           ),
                           ),
@@ -142,7 +148,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("7");},
                             child: RondBTNText("7"),
                           ),
                           ),
@@ -151,7 +157,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("8");},
                             child: RondBTNText("8"),
                           ),
                           ),
@@ -160,7 +166,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("9");},
                             child: RondBTNText("9"),
                           ),
                           ),
@@ -184,7 +190,7 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){loginState.addPinNum("0");},
                             child: RondBTNText("0"),
                           ),
                           ),

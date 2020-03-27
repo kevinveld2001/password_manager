@@ -55,8 +55,11 @@ class ScreenBuilder extends StatelessWidget {
       return LoginRegisterSwitcher();
 
     } else if (loginState.mainsreen == "mainScreen" && loginState.waiterBootScreen) {
+      if (loginState.pincode.length != 6){
+        return PinCodeScreen();
+      }else{
       return MainScreen();
-
+      }
     } else {
       return Scaffold(
         backgroundColor: Colors.white,

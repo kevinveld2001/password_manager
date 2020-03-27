@@ -12,7 +12,11 @@ class LoginState with ChangeNotifier {
   bool _seePassword = true;
   bool _waiterBootScreen = false;
   bool _loginErr = false;
+  String _pincode = "";
+  List<int> _pincodearray = [1,2,2,2,2,2];
 
+  List<int> get pincodearray => _pincodearray;
+  String get pincode => _pincode;
   bool get loginErr => _loginErr;
   bool get waiterBootScreen => _waiterBootScreen;
   bool get seePassword  => _seePassword;
@@ -138,6 +142,31 @@ class LoginState with ChangeNotifier {
     return sucsess;
   }
   
+
+
+
+  //pin code
+
+  void addPinNum (String number){
+    print(number);
+    _pincode += number;
+    print(_pincode);
+    for(int i=0; i < _pincodearray.length ; i++){
+      if (_pincodearray[i] == 1){
+        _pincodearray[i] = 0;
+        if(i < 5){
+          _pincodearray[i + 1] = 1;
+        }
+        break;
+      }
+    }
+
+    notifyListeners();
+  }
+
+
+
+
 
 
 
