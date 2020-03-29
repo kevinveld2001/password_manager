@@ -42,10 +42,18 @@ class ScreenBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var loginState = Provider.of<LoginState>(context);
-    
+    var firebaseState = Provider.of<FirebaseState>(context);
+
     if(!loginState.waiterBootScreen){
     loginState.startApp();
+    
     }
+    String pintest;
+    if(pintest == null){
+    firebaseState.getPinTest(loginState.userID);
+     pintest= firebaseState.pintest;
+    }
+
 
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -56,7 +64,7 @@ class ScreenBuilder extends StatelessWidget {
 
     } else if (loginState.mainsreen == "mainScreen" && loginState.waiterBootScreen) {
       if (!loginState.correctpin){
-        return PinCodeScreen();
+        return PinCodeScreen(pintest);
       }else{
       return MainScreen();
       }

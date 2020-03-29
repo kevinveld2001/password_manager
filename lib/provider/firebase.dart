@@ -10,8 +10,9 @@ class FirebaseState with ChangeNotifier {
   List<PasswordHolder> _seartchpasswordList= [];
 
   bool _seartch = false;
- 
+  String _pintest;
   
+  String get pintest => _pintest;
   List<PasswordHolder> get passwordList => _seartch?_seartchpasswordList : _passwordList;
 
   void seartch (String term) {
@@ -70,6 +71,25 @@ class FirebaseState with ChangeNotifier {
     notifyListeners();
   }
 
+
+  void getPinTest(String uid)async{
+    print("get key fom uid: "+uid);
+    try{
+      if(uid !=""){
+      DocumentSnapshot ds = await Firestore.instance.collection("pin").document(uid).get();
+
+      _pintest = ds.data["pintest"].toString();
+      }
+    }catch(err){
+      var keeperr = err;
+      _pintest = null;
+    }
+    notifyListeners();
+
+  }
+  void setPinTest(String uid,String pintest){
+    Firestore.instance.collection("pin").document(uid).setData({'pintest': pintest,});
+  }
 
 
 }

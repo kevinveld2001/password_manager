@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/provider/firebase.dart';
 import 'package:password_manager/provider/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -7,10 +8,13 @@ import '../widgets/rondBTN.dart';
 
 
 class PinCodeScreen extends StatelessWidget {
+
+  PinCodeScreen(this.pintest);
+  final pintest;
   @override
   Widget build(BuildContext context) {
     var loginState = Provider.of<LoginState>(context);
-    print(loginState.pincodearray);
+    var firebaseState = Provider.of<FirebaseState>(context);
     
 
     return Scaffold(
@@ -36,7 +40,7 @@ class PinCodeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "make a new pin code",
+                  pintest == null? "make a new pin code":"type your pin code",
                   style: TextStyle(
                     fontSize: 40,
                     color: Colors.white,
@@ -185,8 +189,18 @@ class PinCodeScreen extends StatelessWidget {
                           child: RondBTN(
                             onPressed: (){
 
-                              //loginState.encriptByPin();
-                                loginState.decryptByPin("IBOu7ocXIqYLCuDv0EFwvQ==");
+                              
+                              if(pintest != null){
+                                print("decrypt");
+                                loginState.decryptByPin(pintest);
+                              }else{
+                                print("encript");
+                                String newPin = loginState.encriptByPin();
+                                print("encrypted pin= "+newPin);
+
+                                firebaseState.setPinTest(loginState.userID.toString(),newPin);
+                                loginState.decryptByPin(newPin);
+                              }
                             },
                             child: Icon(Icons.check,size: 35,)
                           ),

@@ -203,7 +203,7 @@ class LoginState with ChangeNotifier {
     notifyListeners();
   }
 
-  void encriptByPin(){
+  String encriptByPin(){
     final plainText = 'success';
     final key = encrypt.Key.fromUtf8(_pincode + '..........................');
     final iv = encrypt.IV.fromLength(6);
@@ -215,6 +215,7 @@ class LoginState with ChangeNotifier {
 
     
     print(encrypted.base64);
+    return encrypted.base64.toString();
   }
 
 
