@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:encrypt/encrypt.dart' as encrypt;
+
 
 class LoginState with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,7 +16,10 @@ class LoginState with ChangeNotifier {
   bool _loginErr = false;
   String _pincode = "";
   List<int> _pincodearray = [1,2,2,2,2,2];
+  bool _correctpin = false;
 
+
+  bool get correctpin => _correctpin;
   List<int> get pincodearray => _pincodearray;
   String get pincode => _pincode;
   bool get loginErr => _loginErr;
@@ -115,7 +120,7 @@ class LoginState with ChangeNotifier {
     _auth.signOut();
     _mainscreen = "loginScreen";
       _userID = null;
-    
+    clearPin();
     notifyListeners();
     
   }
@@ -194,10 +199,51 @@ class LoginState with ChangeNotifier {
   void clearPin (){
     _pincode = "";
     _pincodearray = [1,2,2,2,2,2];
+    _correctpin = false;
+    notifyListeners();
+  }
+
+  void encriptByPin(){
+    final plainText = 'success';
+    final key = encrypt.Key.fromUtf8(_pincode + '..........................');
+    final iv = encrypt.IV.fromLength(6);
+
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+    final encrypted = encrypter.encrypt(plainText, iv: iv);
+    
+
+    
+    print(encrypted.base64);
   }
 
 
+  void decryptByPin(String tester){
+    print("to decrypt: "+ tester);
+    try{
+    encrypt.Encrypted encryptedTester = encrypt.Encrypted.from64(tester);
 
+    final key = encrypt.Key.fromUtf8(_pincode + '..........................');
+    final iv = encrypt.IV.fromLength(6);
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+    final decrypted = encrypter.decrypt(encryptedTester, iv: iv);
+    print(decrypted); 
+
+
+
+    if(decrypted == "success"){
+      print("ja het werkt je mag door");
+       _correctpin = true;
+       notifyListeners();
+    }
+    }catch(err){
+        
+        clearPin();
+      
+    }
+
+
+  }
 
 
 }

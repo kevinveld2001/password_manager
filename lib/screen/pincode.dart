@@ -183,7 +183,11 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child: RondBTN(
-                            onPressed: (){},
+                            onPressed: (){
+
+                              //loginState.encriptByPin();
+                                loginState.decryptByPin("IBOu7ocXIqYLCuDv0EFwvQ==");
+                            },
                             child: Icon(Icons.check,size: 35,)
                           ),
                           ),
