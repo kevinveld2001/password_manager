@@ -64,10 +64,8 @@ class ScreenBuilder extends StatelessWidget {
       return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Image.asset("packages/password_manager/assets/icon.png"),
-          )
+          child:Image.asset("packages/password_manager/assets/icon.png"),
+          
         ),
       );
     }
