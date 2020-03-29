@@ -199,7 +199,11 @@ class PinCodeScreen extends StatelessWidget {
                           flex: 1,
                           child: Container(
                           child:RondBTN(
-                            onPressed: (){},
+                            onPressed: (){
+
+                              loginState.removeOnePin();
+
+                            },
                             child: Icon(Icons.backspace,size: 35,)
                           ),
                           ),

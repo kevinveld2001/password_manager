@@ -148,6 +148,7 @@ class LoginState with ChangeNotifier {
   //pin code
 
   void addPinNum (String number){
+    if(_pincode.length < 6){
     print(number);
     _pincode += number;
     print(_pincode);
@@ -162,9 +163,38 @@ class LoginState with ChangeNotifier {
     }
 
     notifyListeners();
+    }
+  }
+
+  void removeOnePin (){
+    try{
+    _pincode = _pincode.substring(0,_pincode.length-1);
+    print(_pincode);
+    bool removedone = false;
+      for(int i=0; i < _pincodearray.length ; i++){
+        if (_pincodearray[i] == 1 && i != 0){
+          _pincodearray[i] = 2;
+          if(i <= 5){
+            _pincodearray[i - 1] = 1;
+          }
+          removedone = true;
+          break;
+        }
+      }
+      if(!removedone){
+        _pincodearray = [0,0,0,0,0,1];
+      }
+    }catch(err){
+      print(err);
+    }
+    notifyListeners();
   }
 
 
+  void clearPin (){
+    _pincode = "";
+    _pincodearray = [1,2,2,2,2,2];
+  }
 
 
 
