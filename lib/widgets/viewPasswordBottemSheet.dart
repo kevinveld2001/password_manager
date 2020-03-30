@@ -6,6 +6,9 @@ import '../provider/firebase.dart';
 import '../provider/passwords.dart';
 import 'viewPasswrodWidgets.dart';
 import '../provider/login.dart';
+
+import 'package:encrypt/encrypt.dart' as encrypt;
+
 class ViewPasswordBottomSheetBuilder extends StatelessWidget {
   final String _docID;
   
@@ -69,11 +72,33 @@ class ViewPasswordBottomSheetBuilder extends StatelessWidget {
     }
 
 
+
+
     for(int i = 0 ; i < passwordList.length; i++){
         if(passwordList[i].docID == _docID){
           _title =passwordList[i].title;
           _email = passwordList[i].email;
-          _password = passwordList[i].password;
+
+
+              String _decryptedPassword = passwordList[i].password;
+              encrypt.Encrypted encryptedTester = encrypt.Encrypted.from64(_decryptedPassword);
+              try{
+              final key = encrypt.Key.fromUtf8(loginState.pincode + '..........................');
+              final iv = encrypt.IV.fromLength(6);
+              final encrypter = encrypt.Encrypter(encrypt.AES(key));
+              final decrypted = encrypter.decrypt(encryptedTester, iv: iv);
+              print("decrypted password: "+decrypted); 
+              
+              _decryptedPassword = decrypted;
+
+              }catch(err){
+                print(err);
+              }
+
+
+
+
+          _password = _decryptedPassword;
           _note = passwordList[i].note;
         }
     }
