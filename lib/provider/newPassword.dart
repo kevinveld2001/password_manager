@@ -10,10 +10,33 @@ class NewPasswordState with ChangeNotifier {
   List<String> _inputfields = ["","","",""];
   bool _passwordVissible = true;
 
-  
-
   List<String> get inputfields  => _inputfields;
   bool get passwordVissible => _passwordVissible;
+
+
+  // password settings var's
+  bool _allowUpperCaseLetters = true;
+  bool _allowNumbers = true;
+  bool _allowSpecial = false;
+
+  bool get allowUpperCaseLetters => _allowUpperCaseLetters;
+  bool get allowNumbers => _allowNumbers;
+  bool get allowSpecial => _allowSpecial;
+
+  void setAllowUpperCaseLetters(bool value){
+    _allowUpperCaseLetters = value;
+    notifyListeners();
+  }
+  void setAllowNumbers(bool value){
+    _allowNumbers = value;
+    notifyListeners();
+  }
+  void setAllowSpecial(bool value){
+    _allowSpecial = value;
+    notifyListeners();
+  }
+
+
 
 
 
@@ -81,16 +104,17 @@ print("password: "+_newPassword);
   String _lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
   String _upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   String _numbers = "0123456789";
-
+  String _special = "@#=+!£\$%&?[](){}";
 
   /// make a random password and put it in the password fieled;
   /// [length] set length of password
   /// [nummbers] put numbers in the password
-  void setRandomPassword(int length,{bool nummber = true}){
+  void setRandomPassword(int length){
     String _charList = ""; 
     _charList += _lowerCaseLetters;
-    _charList += _upperCaseLetters;
-    _charList += nummber == true? _numbers: "";
+    _charList += (_allowUpperCaseLetters?_upperCaseLetters:"");
+    _charList += (_allowNumbers?_numbers:"");
+    _charList += (_allowSpecial?_special:"");
 
     String newRandomPassword = "";
     for(int i=0;i<length;i++){

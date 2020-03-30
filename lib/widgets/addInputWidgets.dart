@@ -225,13 +225,60 @@ class PasswordInput extends StatelessWidget {
               },
             )
             ],),
-            FlatButton(
+            Divider(),
+            Row(children: <Widget>[
+              Text("randomness settings",
+                style: TextStyle(
+                  fontSize: 20,
+              ),),
+            ],),
+
+            SizedBox(height: 10,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text("Upper case Letters"),
+              Checkbox(value: newPasswordState.allowUpperCaseLetters,
+              checkColor: Colors.white,
+              activeColor: Color(0xFF00BFA5),
+              onChanged: (s){
+                newPasswordState.setAllowUpperCaseLetters(s);
+              },),
+            ]),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text("Numbers"),
+              Checkbox(value: newPasswordState.allowNumbers,
+              checkColor: Colors.white,
+              activeColor: Color(0xFF00BFA5),
+              onChanged: (s){
+                newPasswordState.setAllowNumbers(s);
+              },),
+            ]),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text("Special characters"),
+              Checkbox(value: newPasswordState.allowSpecial,
+              checkColor: Colors.white,
+              activeColor: Color(0xFF00BFA5),
+              onChanged: (s){
+                newPasswordState.setAllowSpecial(s);
+              },),
+            ]),
+
+            RaisedButton(
+              color: Color(0xFF00BFA5),
               onPressed: (){
                 newPasswordState.setRandomPassword(20);
               },
                child: Text("random password",
                style: TextStyle(
-                  color: Color(0xFF00BFA5),
+                  color: Colors.white,
                 ),
                )
                ),
