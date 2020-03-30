@@ -34,9 +34,12 @@ class PinCodeScreen extends StatelessWidget {
           Expanded(
             flex: 8,
             child: Container(
-              child: Padding(
+              child:Stack(children: <Widget>[
+              
+               Padding(
               padding: EdgeInsets.symmetric(vertical: 50 , horizontal: 40),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
@@ -46,7 +49,13 @@ class PinCodeScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   ),
-                  
+                  Text(
+                   "Email: "+loginState.userEmail,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.white,
+                  ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -62,6 +71,21 @@ class PinCodeScreen extends StatelessWidget {
 
               ])),
 
+              Positioned(
+                top:30,
+                right: 10,
+                child: IconButton(
+                icon: Icon(Icons.exit_to_app,
+                color: Colors.white,
+                ),
+                onPressed: (){
+                  loginState.logout();
+                  firebaseState.clear(); //clear all data 
+                },
+              )
+            ),
+
+              ],)
             ),
           ),
           Expanded(

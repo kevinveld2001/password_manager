@@ -11,6 +11,7 @@ class LoginState with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String _mainscreen;
   String _userID;
+  String _userEmail;
   bool _seePassword = true;
   bool _waiterBootScreen = false;
   bool _loginErr = false;
@@ -27,6 +28,7 @@ class LoginState with ChangeNotifier {
   bool get seePassword  => _seePassword;
   String get mainsreen => _mainscreen; 
   String get userID => _userID;
+  String get userEmail => _userEmail;
 
 
 
@@ -36,10 +38,12 @@ class LoginState with ChangeNotifier {
       if(value == null){
         _mainscreen = "loginScreen";
         _userID = null;
+        _userEmail = null;
         notifyListeners();
       }else{
         _mainscreen = "mainScreen";
         _userID = value.uid;
+        _userEmail = value.email;
         notifyListeners();
       }
       
@@ -81,6 +85,7 @@ class LoginState with ChangeNotifier {
       password: password
       ).then((v){
         _userID = v.user.uid;
+        _userEmail = v.user.email;
         _mainscreen = "mainScreen";
         print(_userID);
         notifyListeners();
@@ -103,6 +108,7 @@ class LoginState with ChangeNotifier {
         print (err);
       }
       _userID = v.user.uid;
+      _userEmail = v.user.email;
       _mainscreen = "mainScreen";
       print(_userID);
       
@@ -120,6 +126,7 @@ class LoginState with ChangeNotifier {
     _auth.signOut();
     _mainscreen = "loginScreen";
       _userID = null;
+      _userEmail = null;
     clearPin();
     notifyListeners();
     
