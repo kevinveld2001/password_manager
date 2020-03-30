@@ -13,6 +13,9 @@ import 'screen/loginRegisterSwitcher.dart';
 import 'screen/mainScreen.dart';
 import 'screen/pincode.dart';
 
+String pintest;
+
+
 void main() => runApp(ProviderHome());
 
 class ProviderHome extends StatelessWidget {
@@ -48,7 +51,7 @@ class ScreenBuilder extends StatelessWidget {
     loginState.startApp();
     
     }
-    String pintest;
+    
     if(pintest == null){
     firebaseState.getPinTest(loginState.userID);
      pintest= firebaseState.pintest;
