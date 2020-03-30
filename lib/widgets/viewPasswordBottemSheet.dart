@@ -20,10 +20,12 @@ class ViewPasswordBottomSheetBuilder extends StatelessWidget {
   String _note;
   @override
   Widget build(BuildContext context) {
+    
+    double height = MediaQuery.of(context).size.height;
     var firebaseState = Provider.of<FirebaseState>(context);
     var loginState = Provider.of<LoginState>(context);
-    double height = MediaQuery.of(context).size.height;
     
+
     List<PasswordHolder> passwordList = firebaseState.passwordList;
 
     Future _showDeleteBox () {
@@ -88,7 +90,7 @@ class ViewPasswordBottomSheetBuilder extends StatelessWidget {
               final encrypter = encrypt.Encrypter(encrypt.AES(key));
               final decrypted = encrypter.decrypt(encryptedTester, iv: iv);
               print("decrypted password: "+decrypted); 
-              
+
               _decryptedPassword = decrypted;
 
               }catch(err){
@@ -117,15 +119,38 @@ class ViewPasswordBottomSheetBuilder extends StatelessWidget {
              SizedBox(height: 20,),
              ViewPasswordInputBox("email",_email),
              SizedBox(height: 20,),
-             ViewPasswordInputBox("password",_password),
-             SizedBox(height: 20,),
+             ViewPasswordInputBox(firebaseState.viewpasswordVisebility?"seepass":"password",_password),
+             SizedBox(height: 1,),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.end,
+               children: <Widget>[
+               FlatButton(
+              onPressed: (){
+                
+                if(firebaseState.viewpasswordVisebility){
+                  firebaseState.setViewPasswordStrate(false);
+                }else{
+                  firebaseState.setViewPasswordStrate(true);
+                }
+
+
+              },
+               child: Text("see password",
+               style: TextStyle(
+                  color: Color(0xFF00BFA5),
+                ),
+               )
+               ),
+
+               ],),
+             SizedBox(height: 1,),
              ViewPasswordInputBox("note",_note),
               SizedBox(height: 20,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                
+              
                 FlatButton(
               onPressed: (){
                 _showDeleteBox();

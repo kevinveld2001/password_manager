@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/firebase.dart';
+
 
 class PasswordCardWidget extends StatelessWidget {
 PasswordCardWidget(this._title,this._email,this._docid,this._viewPasswordBottomSheet);
 
-String _email;
-String _title;
-String _docid;
+final _email;
+final _title;
+final _docid;
 final Future Function(String) _viewPasswordBottomSheet;
 // Future viewPasswordBottomSheet;
   @override
   Widget build(BuildContext context) {
+    var firebaseState = Provider.of<FirebaseState>(context);
     return Card(
       margin: EdgeInsets.fromLTRB(40, 50, 0, 130),
       child: Container(
@@ -28,6 +32,7 @@ final Future Function(String) _viewPasswordBottomSheet;
           FlatButton(
             
             onPressed: (){
+              firebaseState.setViewPasswordStrate(false);
               _viewPasswordBottomSheet(_docid);
               FocusScope.of(context).requestFocus(new FocusNode());
             },

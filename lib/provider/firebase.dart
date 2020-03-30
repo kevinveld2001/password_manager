@@ -5,14 +5,18 @@ import 'package:flutter/material.dart';
 
 import 'passwords.dart';
 class FirebaseState with ChangeNotifier {
+  FirebaseState();
 
   List<PasswordHolder> _passwordList= [];
-  List<PasswordHolder> _seartchpasswordList= [];
-
-  bool _seartch = false;
   String _pintest;
-  
+  bool _seartch = false;
+  List<PasswordHolder> _seartchpasswordList= [];
+  bool _viewpasswordVisebility = false;
+
+  bool get viewpasswordVisebility => _viewpasswordVisebility;
+
   String get pintest => _pintest;
+
   List<PasswordHolder> get passwordList => _seartch?_seartchpasswordList : _passwordList;
 
   void seartch (String term) {
@@ -28,13 +32,6 @@ class FirebaseState with ChangeNotifier {
       _seartch = true;
     }
   }
-
-  
-
-  FirebaseState();
-
-
-
 
   void getpasswords(String uid){
      Firestore.instance
@@ -59,7 +56,6 @@ class FirebaseState with ChangeNotifier {
 
   }
 
-
   void clear(){
     _passwordList.clear();
     _seartchpasswordList.clear();
@@ -70,7 +66,6 @@ class FirebaseState with ChangeNotifier {
     Firestore.instance.collection("store/$uid/passwords").document(docID).delete();
     notifyListeners();
   }
-
 
   void getPinTest(String uid)async{
     print("get key fom uid: "+uid);
@@ -87,9 +82,22 @@ class FirebaseState with ChangeNotifier {
     notifyListeners();
 
   }
+
   void setPinTest(String uid,String pintest){
     Firestore.instance.collection("pin").document(uid).setData({'pintest': pintest,});
   }
 
 
+
+  
+void setViewPasswordStrate(bool viewPasswordState){
+  _viewpasswordVisebility = viewPasswordState;
+  notifyListeners();
 }
+
+
+
+
+}
+
+
