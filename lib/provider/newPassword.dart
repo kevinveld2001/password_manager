@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
+import 'package:encrypt/encrypt.dart' as encrypt;
+
 class NewPasswordState with ChangeNotifier {
 
   List<String> _inputfields = ["","","",""];
@@ -30,7 +32,7 @@ class NewPasswordState with ChangeNotifier {
     notifyListeners();
   }
 
-  int finish (String uid){
+  int finish (String uid,{String pincode}){
     
     for (int i = 0; i < _inputfields.length - 1; i++){
       if(_inputfields[i].isEmpty){
@@ -40,11 +42,32 @@ class NewPasswordState with ChangeNotifier {
 
   print("add new password \nTitle: ${_inputfields[0]}\nEmail:${_inputfields[1]}\nPassword:${_inputfields[2]}\nNOTE:${_inputfields[3]}");
 
+String _newPassword;
+
+if(pincode == null){
+  _newPassword = _inputfields[2];
+}else{
+    final plainText = _inputfields[2];
+    final key = encrypt.Key.fromUtf8(pincode + '..........................');
+    final iv = encrypt.IV.fromLength(6);
+
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+    final encrypted = encrypter.encrypt(plainText, iv: iv);
+    
+
+    print("encrypted password: "+encrypted.base64);
+    _newPassword = encrypted.base64;
+}
+
+print("password: "+_newPassword);
+
+
   Firestore.instance.collection('store/$uid/passwords').document()
     .setData({ 
       'title': _inputfields[0],
       'email': _inputfields[1],
-      'password': _inputfields[2],
+      'password': _newPassword,
       'note': _inputfields[3],
        });
 

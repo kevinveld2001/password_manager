@@ -313,7 +313,7 @@ class NoteInput extends StatelessWidget {
               onPressed: (){
                   
                   FocusScope.of(context).requestFocus(new FocusNode()); //remove focus
-                  int statuscode = newPasswordState.finish(loginState.userID);
+                  int statuscode = newPasswordState.finish(loginState.userID,pincode: loginState.pincode);
                   if(statuscode == 255){
                     Navigator.pop(context);
                   }else{
