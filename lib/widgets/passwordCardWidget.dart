@@ -15,7 +15,7 @@ final Future Function(String) _viewPasswordBottomSheet;
   Widget build(BuildContext context) {
     var firebaseState = Provider.of<FirebaseState>(context);
     return Card(
-      margin: EdgeInsets.fromLTRB(40, 50, 0, 130),
+      margin: EdgeInsets.fromLTRB(40, 30, 0, 130),
       child: Container(
         height: 100,
         width: 200,

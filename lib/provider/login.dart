@@ -18,8 +18,9 @@ class LoginState with ChangeNotifier {
   String _pincode = "";
   List<int> _pincodearray = [1,2,2,2,2,2];
   bool _correctpin = false;
+  bool _emailVerificatie = false;
 
-
+  bool get emailVerificatie => _emailVerificatie;
   bool get correctpin => _correctpin;
   List<int> get pincodearray => _pincodearray;
   String get pincode => _pincode;
@@ -39,11 +40,13 @@ class LoginState with ChangeNotifier {
         _mainscreen = "loginScreen";
         _userID = null;
         _userEmail = null;
+        _emailVerificatie = false;
         notifyListeners();
       }else{
         _mainscreen = "mainScreen";
         _userID = value.uid;
         _userEmail = value.email;
+        _emailVerificatie = value.isEmailVerified;
         notifyListeners();
       }
       
@@ -87,11 +90,13 @@ class LoginState with ChangeNotifier {
         _userID = v.user.uid;
         _userEmail = v.user.email;
         _mainscreen = "mainScreen";
+        _emailVerificatie = v.user.isEmailVerified;
         print(_userID);
         notifyListeners();
       }).catchError((err){
         print (err);
         _loginErr = true;
+        _emailVerificatie = false;
         notifyListeners();
         resterErr(3);
       });
@@ -110,12 +115,14 @@ class LoginState with ChangeNotifier {
       _userID = v.user.uid;
       _userEmail = v.user.email;
       _mainscreen = "mainScreen";
+      _emailVerificatie = v.user.isEmailVerified;
       print(_userID);
       
       notifyListeners();
     }).catchError((err){
       print(err);
       _loginErr = true;
+      _emailVerificatie = false;
       notifyListeners();
       resterErr(3);
     });
@@ -127,6 +134,7 @@ class LoginState with ChangeNotifier {
     _mainscreen = "loginScreen";
       _userID = null;
       _userEmail = null;
+      _emailVerificatie = false;
     clearPin();
     notifyListeners();
     

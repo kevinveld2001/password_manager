@@ -12,6 +12,12 @@ class FirebaseState with ChangeNotifier {
   bool _seartch = false;
   List<PasswordHolder> _seartchpasswordList= [];
   bool _viewpasswordVisebility = false;
+  int _allowNumOfPasswords = 0;
+  int _numOfPasswords = 0;
+
+
+  int get allowNumOfPasswords => _allowNumOfPasswords;
+  int get numOfPasswords => _numOfPasswords;
 
   bool get viewpasswordVisebility => _viewpasswordVisebility;
 
@@ -40,6 +46,7 @@ class FirebaseState with ChangeNotifier {
     .snapshots()
     .listen((data){
       _passwordList.clear();
+      _numOfPasswords = data.documents.length;
       data.documents.forEach((doc) {
            
           
@@ -51,6 +58,7 @@ class FirebaseState with ChangeNotifier {
             doc.documentID.toString()
           ));
         });
+        
         notifyListeners();
     });
 
@@ -95,6 +103,17 @@ void setViewPasswordStrate(bool viewPasswordState){
   notifyListeners();
 }
 
+
+
+  void setVerificatieState(bool verificatie){
+
+    if (verificatie){
+      _allowNumOfPasswords = 30;
+    }else{
+      _allowNumOfPasswords = 5;
+    }
+
+  }
 
 
 

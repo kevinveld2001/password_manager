@@ -21,8 +21,6 @@ Future<void> startFirebaseState(var firebaseState,var loginState) {
 class MainScreen extends StatelessWidget {
   final _seartchFormKey = GlobalKey<FormState>();
 
-
-  
   @override
   Widget build(BuildContext context) {
   
@@ -63,8 +61,12 @@ class MainScreen extends StatelessWidget {
     var loginState = Provider.of<LoginState>(context);
     if (firebaseState.passwordList.length ==0){ 
          startFirebaseState(firebaseState,loginState);
+         firebaseState.setVerificatieState(loginState.emailVerificatie);
+         
     }
-    
+    print(firebaseState.allowNumOfPasswords);
+    print(firebaseState.numOfPasswords);
+
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       body:SingleChildScrollView(
@@ -74,7 +76,7 @@ class MainScreen extends StatelessWidget {
         
         child: Column(children: <Widget>[
           Expanded(
-          flex: 3,
+          flex: 10,
           child: Container(
             alignment: Alignment.topLeft,
             margin: EdgeInsets.all(0.0),
@@ -161,7 +163,28 @@ class MainScreen extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex:1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                child: Text(
+                  firebaseState.numOfPasswords.toString()+" / "+firebaseState.allowNumOfPasswords.toString(),
+                  style: TextStyle(
+                fontSize: 15
+              ),),
+              )
+          ],)
+          
+          
+              
+          
+          
+        ),
+        Expanded(
+          flex: 10,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: firebaseState.passwordList.length,
@@ -182,13 +205,22 @@ class MainScreen extends StatelessWidget {
       ),
       ),
 
-    floatingActionButton: FloatingActionButton(
+    floatingActionButton:firebaseState.allowNumOfPasswords > firebaseState.numOfPasswords? FloatingActionButton(
       backgroundColor:  Color(0xFF00BFA5),
       child: Icon(Icons.add),
       onPressed: ()async{
         _showNewPasswordBottomSheet();
         newPasswordState.clearInput();
         FocusScope.of(context).requestFocus(new FocusNode());
+      },
+
+    ):
+    FloatingActionButton(
+      backgroundColor:  Colors.grey,
+      
+      child: Icon(Icons.add),
+      onPressed: ()async{
+       
       },
 
     ),
