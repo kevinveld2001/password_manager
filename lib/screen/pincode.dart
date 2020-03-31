@@ -79,8 +79,9 @@ class PinCodeScreen extends StatelessWidget {
                 color: Colors.white,
                 ),
                 onPressed: (){
-                  loginState.logout();
                   firebaseState.clear(); //clear all data 
+                  loginState.logout();
+                  
                 },
               )
             ),

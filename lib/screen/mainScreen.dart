@@ -149,8 +149,10 @@ class MainScreen extends StatelessWidget {
                 color: Colors.white,
                 ),
                 onPressed: (){
+                  firebaseState.clear(); //clear all data
                   loginState.logout();
-                  firebaseState.clear(); //clear all data 
+                  
+                  
                 },
               )
             ),

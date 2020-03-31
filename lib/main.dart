@@ -51,7 +51,7 @@ class ScreenBuilder extends StatelessWidget {
     loginState.startApp();
     
     }
-    
+    pintest= firebaseState.pintest;
     if(pintest == null){
     firebaseState.getPinTest(loginState.userID);
      pintest= firebaseState.pintest;

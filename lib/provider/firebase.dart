@@ -68,7 +68,11 @@ class FirebaseState with ChangeNotifier {
     _passwordList.clear();
     _seartchpasswordList.clear();
     _seartch = false;
+    _pintest = null;
+    notifyListeners();
   }
+
+
 
   void deleteitem(String docID,String uid){
     Firestore.instance.collection("store/$uid/passwords").document(docID).delete();
@@ -110,7 +114,7 @@ void setViewPasswordStrate(bool viewPasswordState){
     if (verificatie){
       _allowNumOfPasswords = 30;
     }else{
-      _allowNumOfPasswords = 5;
+      _allowNumOfPasswords = 3;
     }
 
   }
