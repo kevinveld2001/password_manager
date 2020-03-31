@@ -19,9 +19,12 @@ i am not responsible in any way posible in case something goes wrong with the se
 you are free to see the source code. and use it for educational purposes.
 you are not allowed to sell or make money of the source code.
 
+if you change the source code and releas it you are liable. if your version allowes the user to violate
+the terms of service it will be considered your mistake and you will be liable.
+
+for example if you make a hacked version of the app that will allow the user to violate the terms of service than you are violating it not the user.
+
  - privacy
 i don't collect any data other than the data you give me.
 i will try to do what i can to protect it, but when something goes wrong i am not liable.
-in version 1.0 passwords are not encrypted. 
 
-there are plans to fix this in version 2.0.
